@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-World Semantic SLAM Survey · PAIRS Lab</title>
+<meta name="description" content="Project page of the survey Open-World Semantic SLAM: representations, uncertainty and lifelong adaptation. Explore 81 systems in four pillars, cross-pillar scores, 17 claims and 7 open problems.">
+<meta property="og:title" content="Open-World Semantic SLAM: A Survey on Representations, Uncertainty, and Lifelong Adaptation">
+<meta property="og:description" content="Preprint, 2026 · PAIRS Lab">
+<meta property="og:image" content="images/pillars.jpg">
+<meta name="theme-color" content="#063a7a">
+<link rel="canonical" href="https://thanhnguyencanh.github.io/open-semanticSLAM-survey/">
+<link rel="icon" href="https://pairs-lab.github.io/images/brand/pairs-lab-icon-32.png" type="image/png">
+<link rel="stylesheet" href="assets/style.css">
+<script>document.documentElement.classList.add("js")</script>
+<script src="assets/data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-row">
+    <a class="lab" href="https://pairs-lab.github.io/"><img src="https://pairs-lab.github.io/images/brand/pairs-lab-horizontal.png" alt="PAIRS Lab" width="120" height="35"></a>
+    <nav class="toc" aria-label="Sections">
+      <a href="#overview">Overview</a><a href="#pillars">Pillars</a><a href="#explorer">Systems</a><a href="#scores">Scores</a><a href="#claims">Claims</a><a href="#challenges">Open problems</a><a href="#architecture">Architecture</a><a href="#cite">Cite</a>
+    </nav>
+    <a class="gh" href="https://github.com/thanhnguyencanh/open-semanticSLAM-survey" aria-label="GitHub repository"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <p class="venue"><span>Preprint</span> 2026 · Survey</p>
+    <h1>Open-World Semantic SLAM</h1>
+    <p class="subtitle">A survey on representations, uncertainty, and lifelong adaptation</p>
+    <p class="authors">
+      <a href="https://thanhnguyencanh.github.io/">Thanh Nguyen Canh</a><sup>1</sup>,
+      Haolan Zhang<sup>1</sup>,
+      <a href="https://sites.google.com/site/xiemhoang/">Xiem HoangVan</a><sup>2</sup>,
+      <a href="https://www.jaist.ac.jp/robot/">Nak Young Chong</a><sup>1</sup>
+    </p>
+    <p class="affils"><sup>1</sup>Japan Advanced Institute of Science and Technology &nbsp; <sup>2</sup>VNU University of Engineering and Technology</p>
+    <div class="actions">
+      <span class="btn btn-off" title="The paper link will be added when the preprint is public">Paper · coming soon</span>
+      <a class="btn" href="https://github.com/thanhnguyencanh/open-semanticSLAM-survey">Paper list <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-solid" href="#explorer">Explore the systems <span aria-hidden="true">↓</span></a>
+    </div>
+    <dl class="counters" id="counters"></dl>
+  </div>
+</section>
+
+<section class="block" id="overview">
+  <div class="wrap two">
+    <div>
+      <p class="kicker">01 · Overview</p>
+      <h2>Semantic SLAM beyond a <em>closed</em>, <em>static</em>, <em>certain</em> world</h2>
+    </div>
+    <div class="prose">
+      <p>Semantic SLAM still largely assumes a closed set of categories, a static world and deterministic labels. Four developments each relax one of these assumptions: differentiable scene representations such as neural radiance fields and 3D Gaussian splatting, vision–language foundation models, principled uncertainty quantification, and lifelong mapping. Yet the literature has grown in parallel threads.</p>
+      <p>This survey argues that these threads are <strong>interlocking pillars</strong> of a single shift toward <strong>open-world semantic SLAM</strong>: SLAM with open vocabularies, in non-stationary environments, with calibrated beliefs over geometry and meaning. It gives a unified probabilistic formulation, organizes 81 systems around four pillars, assesses them through 17 explicit claims, shows that no current system addresses all four, and closes with a reference architecture and seven open problems.</p>
+    </div>
+  </div>
+  <div class="wrap cards3">
+    <article class="card"><span class="card-num ow">OW1</span><h3>Open vocabulary</h3><p>Not a fixed taxonomy of K classes: the map answers natural-language queries such as “the red mug on the left shelf”.</p></article>
+    <article class="card"><span class="card-num ow">OW2</span><h3>Non-stationary world</h3><p>Not a time-invariant map: objects move, furniture is rearranged, seasons change, and the map is maintained across sessions.</p></article>
+    <article class="card"><span class="card-num ow">OW3</span><h3>Calibrated semantics</h3><p>Not point-estimate labels: every map element carries a calibrated belief over what it is, not only over where it is.</p></article>
+  </div>
+  <div class="wrap">
+    <figure class="figure"><img src="images/evolution.jpg" alt="Timeline of SLAM from 2011 to 2026 in four eras: classical geometric, closed-set semantic, neural and Gaussian, and open-world, with three waves of foundation models above." width="1791" height="672" loading="lazy"><figcaption>Fig. 2: evolution of SLAM from classical to open-world. Each lane is one era; above, the three waves of foundation models (CLIP, SAM, LLMs).</figcaption></figure>
+  </div>
+</section>
+
+<section class="block alt" id="pillars">
+  <div class="wrap">
+    <p class="kicker">02 · Four pillars</p>
+    <h2>Four pillars that constrain one another</h2>
+    <div class="pillar-grid">
+      <figure class="figure"><img src="images/pillars.jpg" alt="The four pillars as a diamond: P1 representations, P2 foundation models, P3 uncertainty and P4 lifelong adaptation, with arrows for how each constrains the others." width="896" height="744" loading="lazy"><figcaption>Fig. 3: the pillars are pairwise coupled. Solid arrows: evidence cited in the survey; dashed: not yet shown in SLAM.</figcaption></figure>
+      <div>
+        <div class="tabs" role="tablist" id="pillar-tabs"></div>
+        <div id="pillar-panel" class="pillar-panel" role="tabpanel"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="explorer">
+  <div class="wrap">
+    <p class="kicker">03 · The 81 systems</p>
+    <h2>Explore the taxonomy</h2>
+    <p class="lead">Every system appears once, under the pillar it primarily advances (Fig. 4). Filter by pillar or group, or search by name or title. Click a system for its reference.</p>
+    <div class="controls">
+      <label class="sr" for="q">Search systems</label>
+      <input id="q" type="search" placeholder="Search name or paper title…" autocomplete="off">
+      <label class="sr" for="sort">Sort</label>
+      <select id="sort"><option value="group">By pillar and group</option><option value="year-desc">Newest first</option><option value="year-asc">Oldest first</option><option value="name">Name A–Z</option></select>
+    </div>
+    <div class="chips" id="pillar-chips" aria-label="Pillars"></div>
+    <div class="chips" id="group-chips" aria-label="Groups"></div>
+    <div class="year-strip" id="year-strip" aria-label="Systems per year"></div>
+    <p class="count" id="count" role="status"></p>
+    <div class="sys-grid" id="sys-grid"></div>
+    <p class="more-row"><button type="button" class="btn-more" id="more" hidden></button></p>
+    <p class="empty" id="empty" hidden>No system matches these filters.</p>
+  </div>
+</section>
+
+<section class="block alt" id="scores">
+  <div class="wrap">
+    <p class="kicker">04 · Cross-pillar analysis</p>
+    <h2>Specialists, not generalists</h2>
+    <p class="lead">21 representative systems scored 0–3 on each pillar (0: not addressed · 1: superficially · 2: a primary contribution · 3: state of the art at publication). The survey's target is at least 2 on every pillar, 8 in total.</p>
+    <div class="score-controls"><label for="score-sort">Sort by</label><select id="score-sort"><option value="paper">Paper order</option><option value="total">Total score</option><option value="P1">P1</option><option value="P2">P2</option><option value="P3">P3</option><option value="P4">P4</option></select></div>
+    <div class="score-chart" id="score-chart"></div>
+    <div class="trends" id="score-facts"></div>
+  </div>
+</section>
+
+<section class="block" id="claims">
+  <div class="wrap">
+    <p class="kicker">05 · 17 claims</p>
+    <h2>Explicit, falsifiable claims</h2>
+    <p class="lead">Each pillar chapter ends with a critical assessment stated as claims (Table 6). Filter by pillar; claims that feed an open problem link to it.</p>
+    <div class="chips" id="claim-chips" aria-label="Pillars"></div>
+    <ol class="claims" id="claim-list"></ol>
+  </div>
+</section>
+
+<section class="block alt" id="challenges">
+  <div class="wrap">
+    <p class="kicker">06 · Research agenda</p>
+    <h2>Seven open problems, each with a success test</h2>
+    <div class="op-grid" id="op-grid"></div>
+  </div>
+</section>
+
+<section class="block" id="architecture">
+  <div class="wrap">
+    <p class="kicker">07 · Reference architecture</p>
+    <h2>One system, five modules, four pillars</h2>
+    <p class="lead">Tracking and the map back-end (P1) run at frame and keyframe rate; semantic grounding (P2) produces open-vocabulary embeddings; an uncertainty engine (P3) keeps per-element posteriors; a lifelong manager (P4) detects change and updates submaps; an LLM interface answers compositional queries.</p>
+    <figure class="figure"><img src="images/architecture.jpg" alt="Architecture: RGB-D input to a tracking front-end and a map back-end of Gaussian or neural-point submaps, a semantic grounding module with CLIP, SAM and DINOv2, an uncertainty engine with Dirichlet BKI or EDL updates, a lifelong manager, and an LLM interface over the open-world map." width="1753" height="607" loading="lazy"><figcaption>Fig. 11: conceptual architecture for open-world semantic SLAM.</figcaption></figure>
+    <figure class="figure"><img src="images/structure.jpg" alt="Structure of the survey: foundations, four pillars, synthesis and outlook." width="1787" height="459" loading="lazy"><figcaption>Fig. 1: how the survey is organized.</figcaption></figure>
+  </div>
+</section>
+
+<section class="block alt" id="cite">
+  <div class="wrap">
+    <p class="kicker">08 · Cite</p>
+    <h2>Citation</h2>
+    <div class="bib"><pre id="bibtex">@misc{canh2026openworld,
+  title  = {Open-World Semantic {SLAM}: A Survey on Representations, Uncertainty, and Lifelong Adaptation},
+  author = {Canh, Thanh Nguyen and Zhang, Haolan and HoangVan, Xiem and Chong, Nak Young},
+  note   = {Preprint},
+  year   = {2026}
+}</pre><button type="button" class="copy" id="copy-bib">Copy</button></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <p>© 2026 the authors · <a href="https://pairs-lab.github.io/">PAIRS Lab</a> · Figures and data from the preprint manuscript.</p>
+    <a href="#main">Back to top ↑</a>
+  </div>
+</footer>
+</body>
+</html>
